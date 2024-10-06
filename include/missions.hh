@@ -61,6 +61,7 @@ class MissionRandomizer
         std::string RandomizeOnceSeed;
         int         MissionSeedHash         = 0;
         bool        ForcedRandomizeOnceSeed = false;
+        bool        ReverseMissionOrder     = false;
 
         bool PreserveMomentum    = true;
         bool DisableMainSCMCheck = false;

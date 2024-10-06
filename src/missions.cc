@@ -36,6 +36,23 @@ int exceptions[] = {
     71, // Back To School
 };
 
+const std::map<int, int> reverseMissionListAny
+    = {{11, 112}, {12, 111}, {13, 110}, {14, 109}, {15, 108}, {16, 105},
+       {27, 107}, {31, 106}, {28, 104}, {17, 103}, {18, 102}, {19, 92},
+       {36, 82},  {32, 94},  {33, 81},  {34, 93},  {22, 91},  {29, 95},
+       {30, 87},  {21, 90},  {23, 89},  {20, 88},  {24, 86},  {34, 85},
+       {25, 84},  {26, 80},  {37, 79},  {38, 78},  {39, 77},  {43, 76},
+       {46, 75},  {45, 63},  {42, 57},  {41, 62},  {44, 64},  {48, 56},
+       {48, 61},  {47, 52},  {49, 60},  {51, 55},  {50, 66},  {58, 65},
+       {59, 54},  {59, 53},  {53, 59},  {54, 59},  {65, 58},  {66, 50},
+       {55, 51},  {60, 49},  {52, 47},  {61, 48},  {56, 48},  {64, 44},
+       {62, 41},  {57, 42},  {63, 45},  {75, 46},  {76, 43},  {77, 39},
+       {78, 38},  {79, 37},  {80, 26},  {84, 25},  {85, 34},  {86, 24},
+       {88, 20},  {89, 23},  {90, 21},  {87, 30},  {95, 29},  {91, 22},
+       {93, 34},  {81, 33},  {94, 32},  {82, 36},  {92, 19},  {102, 18},
+       {103, 17}, {104, 28}, {106, 31}, {107, 27}, {105, 16}, {108, 15},
+       {109, 14}, {110, 13}, {111, 12}, {112, 11}};
+
 /*******************************************************/
 void
 Teleport (Position pos, bool saveMomentum, bool refresh = true)
@@ -196,6 +213,14 @@ MissionRandomizer::GetRandomMission (int originalMission)
                         index = 0;
 
                     return mShuffledOrder[originalMission][index];
+                }
+        }
+    if (m_Config.ReverseMissionOrder)
+        {
+            auto it = reverseMissionListAny.find (originalMission);
+            if (it != reverseMissionListAny.end ())
+                {
+                    return it->second;
                 }
         }
 
@@ -883,6 +908,7 @@ MissionRandomizer::Initialise ()
             std::pair ("RandomizeOnceSeed", &m_Config.RandomizeOnceSeed),
             std::pair ("ForcedRandomizeOnceSeed",
                        &m_Config.ForcedRandomizeOnceSeed),
+            std::pair ("ReverseMissionOrder", &m_Config.ReverseMissionOrder),
             std::pair ("ConserveMomentumThroughTeleports",
                        &m_Config.PreserveMomentum),
             std::pair ("DisableMainScmCheck", &m_Config.DisableMainSCMCheck)))
