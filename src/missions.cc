@@ -53,6 +53,26 @@ const std::map<int, int> reverseMissionListAny
        {103, 17}, {104, 28}, {106, 31}, {107, 27}, {105, 16}, {108, 15},
        {109, 14}, {110, 13}, {111, 12}, {112, 11}};
 
+const std::map<int, int> reverseMissionListAll = {
+    {11, 112}, {12, 111}, {13, 110}, {14, 109}, {15, 108}, {16, 105},
+    {27, 107}, {31, 106}, {28, 104}, {17, 103}, {18, 102}, {19, 101},
+    {36, 92},  {32, 100}, {33, 82},  {34, 94},  {22, 81},  {29, 91},
+    {30, 95},  {21, 99},  {23, 98},  {24, 97},  {34, 96},  {25, 87},
+    {20, 90},  {26, 93},  {37, 89},  {38, 88},  {39, 86},  {40, 85},
+    {43, 84},  {46, 80},  {45, 79},  {42, 78},  {41, 77},  {44, 70},
+    {48, 69},  {48, 68},  {47, 67},  {49, 76},  {51, 75},  {50, 63},
+    {58, 57},  {59, 62},  {59, 64},  {53, 56},  {54, 61},  {65, 52},
+    {66, 60},  {55, 74},  {72, 73},  {73, 72},  {74, 55},  {60, 66},
+    {52, 65},  {61, 54},  {56, 53},  {64, 59},  {62, 59},  {57, 58},
+    {63, 50},  {75, 51},  {76, 49},  {67, 47},  {68, 48},  {69, 48},
+    {70, 44},  {77, 41},  {78, 42},  {79, 45},  {80, 46},  {84, 43},
+    {85, 40},  {86, 39},  {88, 38},  {89, 37},  {93, 26},  {90, 20},
+    {87, 25},  {96, 34},  {97, 24},  {98, 23},  {99, 21},  {95, 30},
+    {91, 29},  {81, 22},  {94, 34},  {82, 33},  {100, 32}, {92, 36},
+    {101, 19}, {102, 18}, {103, 17}, {104, 28}, {106, 31}, {107, 27},
+    {105, 16}, {108, 15}, {109, 14}, {110, 13}, {111, 12}, {112, 11}
+};
+
 /*******************************************************/
 void
 Teleport (Position pos, bool saveMomentum, bool refresh = true)
@@ -219,6 +239,14 @@ MissionRandomizer::GetRandomMission (int originalMission)
         {
             auto it = reverseMissionListAny.find (originalMission);
             if (it != reverseMissionListAny.end ())
+                {
+                    return it->second;
+                }
+        }
+    if (m_Config.ReverseMissionAllMissionOrder)
+        {
+            auto it = reverseMissionListAll.find (originalMission);
+            if (it != reverseMissionListAll.end ())
                 {
                     return it->second;
                 }
@@ -909,6 +937,7 @@ MissionRandomizer::Initialise ()
             std::pair ("ForcedRandomizeOnceSeed",
                        &m_Config.ForcedRandomizeOnceSeed),
             std::pair ("ReverseMissionOrder", &m_Config.ReverseMissionOrder),
+            std::pair ("ReverseMissionAllMissionOrder", &m_Config.ReverseMissionAllMissionOrder),
             std::pair ("ConserveMomentumThroughTeleports",
                        &m_Config.PreserveMomentum),
             std::pair ("DisableMainScmCheck", &m_Config.DisableMainSCMCheck)))

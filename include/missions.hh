@@ -62,6 +62,7 @@ class MissionRandomizer
         int         MissionSeedHash         = 0;
         bool        ForcedRandomizeOnceSeed = false;
         bool        ReverseMissionOrder     = false;
+        bool        ReverseMissionAllMissionOrder     = false;
 
         bool PreserveMomentum    = true;
         bool DisableMainSCMCheck = false;

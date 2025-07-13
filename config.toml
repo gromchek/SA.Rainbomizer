@@ -199,6 +199,8 @@ RandomizeOnceSeed = "" # https://en.wikipedia.org/wiki/Random_seed - useful for 
 ForcedRandomizeOnceSeed = false # Force the seed on existing save files
 # ReverseMissionOrder - play the missions in reverse order of any% route
 ReverseMissionOrder = false
+# ReverseMissionAllMissionOrder - play the missions in reverse order of all mission route
+ReverseMissionAllMissionOrder = false
 
 # Set to true to keep your speed through end of mission teleports
 # If false, you will always be forced to a dead stop regardless of speed after a teleport
